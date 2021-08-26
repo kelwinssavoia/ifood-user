@@ -25,7 +25,7 @@ class SessionContoller {
     if (await user.comparePassword(password)) {
       return res.json({
         user,
-        token: user.generateToken()
+        token: user.generateToken(),
       });
     }
 
@@ -43,11 +43,9 @@ class SessionContoller {
       return res.status(401).send({ message: "Blocked user" });
     }
 
-    if (await user.comparePassword(password)) {
-      return res.json({
-        user
-      });
-    }
+    return res.json({
+      user,
+    });
 
     return res.status(401).send({ message: "Invalid password" });
   }

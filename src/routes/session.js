@@ -1,5 +1,6 @@
 const routes = require("express").Router();
 const { body } = require("express-validator");
+const authMiddleware = require("../app/middleware/auth");
 
 const SessionController = require("../app/controllers/SessionController");
 
@@ -11,5 +12,5 @@ routes.post(
   ],
   SessionController.signin
 );
-routes.post("/me", [], SessionController.userInfos);
+routes.post("/me", [authMiddleware], SessionController.userInfos);
 module.exports = routes;
