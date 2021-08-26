@@ -4,7 +4,7 @@ const profileEnum = require("../statics/profileEnum");
 
 class AccountContoller {
   async store(req, res) {
-    const { name, email, password, phone  } = req.body;
+    const { name, email, password, phone } = req.body;
 
     const errors = validationResult(req);
 
@@ -21,6 +21,7 @@ class AccountContoller {
         name,
         email,
         password,
+        phone,
         blocked: false,
         profile: profileEnum.USUARIO,
       });
@@ -29,7 +30,6 @@ class AccountContoller {
         user,
         token: user.generateToken(),
       });
-
     } catch (err) {
       console.log(err);
       return res.status(500).send({ message: "Error on create user!" });
