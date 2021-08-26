@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({ message: "Token not provided" });
 
     [, token] = authHeader.split(" ");
-    const obj = jwt.verify(token, process.env.APP_SECRET);
+    const obj = jwt.verify(token, process.env.APP_SECRET || "TESTE");
     req.userId = obj.id;
     const user = await User.findById(obj.id);
 
